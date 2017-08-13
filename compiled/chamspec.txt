@@ -1,0 +1,40 @@
+### .cham file specifications
+
+ - Dimensions
+ - Layers
+ - How to organize .png files for the compiler
+
+### Dimensions
+
+The first line contains the dimensions of the chamber in tile width (we could refer to these as meters, if necessary)
+using a string "#x#". These dimensions are x by y. The first "y" number of characters will be the leftmost column of the chamber, and the next "y" number of characters will be the column to the right.
+
+If the string was "abcd", then the pixels in the 2x2 grid would be:
+
+|       |       |
+| :---: | :---: |
+|   a   |   c   |
+|   b   |   d   |
+
+### Layers
+
+The layers (for now) consist of foreground, background, and music. More layers can be added as necessary. These layers are specified in the .cham format with a two-character abbreviation at the beginning of the row:
+
+fg:
+bg:
+mu:
+
+The layers don't have to be in order, but if the compiler does its job correctly, it will.
+
+### Organization of /chambers dir
+
+Organizing the directory is simple. Each chamber will have its own directory within the /chambers directory. These individual chamber directories will be the name of the chamber. Each png file will have \<chambername\>_\<layername\>.png format. This can be seen in the example tree shown below.
+
+chambers
+├── bosschamber
+│   ├── bosschamber_bg.png
+│   └── bosschamber_fg.png
+└── chamber1
+    ├── chamber1_bg.png
+    └── chamber1_fg.png
+
