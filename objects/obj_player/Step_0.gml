@@ -12,10 +12,17 @@ if (vsp < VSP_CAP){
 	vsp += grav
 }
 
-// We've not hit a wall yet
-if (place_meeting(x, y+ vsp, obj_wall)){
+// Hit a wall
+if (place_meeting(x, y + vsp, obj_wall)){
 	if (jump) vsp = -jumpspd
-	else vsp = 0
+	else if (sign(vsp) > 0) vsp = 0
+}
+
+if (place_meeting(x + hsp, y, obj_wall)){
+	while (!place_meeting(x+sign(hsp), y, obj_wall)){
+		y += sign(hsp)
+	}
+	hsp = 0
 }
 
 
