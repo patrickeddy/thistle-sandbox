@@ -3,20 +3,23 @@
 // get input
 left = -keyboard_check(ord("A"))
 right = keyboard_check(ord("D"))
-up = -keyboard_check(ord("W"))
-down = keyboard_check(ord("S"))
+jump = keyboard_check_pressed(vk_space)
 
 // figure out the movement direction
-spd = 50;
-hsp = left + right
-vsp = up + down
+hsp = (left + right) * spd
 
-// if moving diagonally, reduce that speed
-if (hsp != 0 && vsp != 0) {
-	hsp = hsp*.7
-	vsp = vsp*.7
+if (vsp < VSP_CAP){
+	vsp += grav
 }
 
+// We've not hit a wall yet
+if (place_meeting(x, y+ vsp, obj_wall)){
+	if (jump) vsp = -jumpspd
+	else vsp = 0
+}
+
+
+
 // change player position
-x += hsp * spd
-y += vsp * spd 
+x += hsp
+y += vsp
