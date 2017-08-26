@@ -2,24 +2,24 @@ import os
 from PIL import Image
 import json
 
+# ridiculous global variable to prevent multiple readings of a file, or passing a parameter around :(
+with open("build/conversion.json", 'r') as json_file:
+    conversions = json.JSONDecoder().decode(json_file.read())
+
 # accepts list of layers as argument
 # eg ['chamber1_fg.png', 'chamber1_bg.png']
-# returns string
+# returns list of strings
 def compileChamberLayers(chambers): return [compileChamber(layer) for layer in chambers]
 
 # accepts single path to png
 # eg 'chamber1_fg.png'
 # returns string
 def compileChamber(layer):
-	image = Image.open(layer)
-	pixels = image.load()
+	pixels = Image.open(layer).load()
 	compile_string = ""
 	for x in range(image.size[0]):
 		for y in range(image.size[1]):
-			if pixels[x,y] == (255, 255, 255, 255):
-				compile_string += "w"
-			elif pixels[x,y] == (0, 0, 0, 255):
-				compile_string += "b"
+			compile_string += conversions.get(",".join(map(str, pixels[x,y]))) + ","
 	return compile_string
 
 def main():
@@ -30,11 +30,8 @@ def main():
 	# list of strings (representing an entire compiled chamber)
 	compiled_chambers = [compileChamberLayers(layers) for layers in chambers]
 	json_out = {"chambers":compiled_chambers}
+	# write out to json file
 	open("compiled.json", "w+").write(json.dumps(json_out))
-	# list of string tuples of (filename, filecontent)
-	#file_pairs = zip([chamber[0].split("_")[0] for chamber in chambers], compiled_chambers)
-	# print out each string to its own file in /compiled 
-	# saveFiles(file_pairs)
 	print("Files saved to compiled.json")
 	
 if __name__ == "__main__":
