@@ -8,30 +8,19 @@ jump = keyboard_check_pressed(vk_space)
 // figure out the movement direction
 hsp = (left + right) * spd
 
-if (vsp < VSP_CAP){
+// add some gravity
+if (vsp < VSP_CAP
+	&& !place_meeting(x, y+1, obj_wall)){
 	vsp += grav
 }
 
-// Hit a wall
-if (place_meeting(x, y + vsp, obj_wall)){
-	if (jump) vsp = -jumpspd
-	if (sign(vsp) > 0) {
-		while (!place_meeting(x, y+sign(vsp), obj_wall)){
-			y += sign(vsp)
-		}
-		vsp = 0
-	}
+// enable jump
+if (place_meeting(x, y + 1, obj_wall)
+	&& jump) {
+	vsp = -jumpspd
 }
-
-if (place_meeting(x + hsp, y, obj_wall)){
-	while (!place_meeting(x+sign(hsp), y, obj_wall)){
-		x += sign(hsp)
-	}
-	hsp = 0
-}
-
 
 
 // change player position
-x += hsp
-y += vsp
+if (!place_meeting(x + hsp, y, obj_wall)) x += hsp
+if (!place_meeting(x, y + vsp, obj_wall)) y += vsp
