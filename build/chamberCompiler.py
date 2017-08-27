@@ -6,36 +6,50 @@ import json
 with open("build/conversion.json", 'r') as json_file:
     conversions = json.JSONDecoder().decode(json_file.read())
 
-# accepts list of layers as argument
+# accepts list of paths to layers
 # eg ['chamber1_fg.png', 'chamber1_bg.png']
-# returns list of strings
-def compileChamberLayers(chambers): return [compileChamber(layer) for layer in chambers]
+def compileChamber(layers):
+	layer_dict = {}
+	for layer in layers:
+		# this indexing only works if layers are saved as .png or .jpg
+		layer_name = layer[layer.find('_')+1:-4]
+		image = Image.open(layer)
+		layer_dict[layer_name] = compileLayer(list(image.getdata()))
+	return {
+		# this only works on unix-based systems, and could be troublesome in the future
+		"name" : layer[layer.rfind('/')+1:layer.find('_')],
+		# size as x by y
+		"size" : [image.size[0], image.size[1]],
+		# might be good to specify layer orderings
+		"layers" : layer_dict
+	}
 
-# accepts single path to png
+# accepts list of pixel values
 # eg 'chamber1_fg.png'
-# returns string
-def compileChamber(layer):
-	image = Image.open(layer)
-	pixels = image.load()
-	compile_string = ""
-	for x in range(image.size[0]):
-		for y in range(image.size[1]):
-			try:
-				compile_string += conversions.get(",".join(map(str, pixels[x,y]))) + ","
-			except(TypeError):
-				raise ValueError("Pixel [{}, {}] in {} does not correspond to a valid object.\nThe pixel's value is {}".format(str(x), str(y), layer, pixels[x,y]))
-	return compile_string
+# returns list of object names to instantiate
+def compileLayer(pixels):
+	obj_list = []
+	for pixel in pixels:
+		object_name = conversions.get(",".join(map(str, pixel)))
+		if object_name is not None:
+			obj_list.append(object_name)
+		else:
+			raise ValueError("some pixel doesn't translate to an object reference.\nValue is: {}".format(pixel)) 
+	return obj_list
 
 def main():
 	# get correct dir even within /build or /
 	root = (os.getcwd()[:-6] if os.getcwd().endswith('build') else os.getcwd()) + '/chambers/'
-	# list of lists of layerpaths
+	# create list of lists of layerpaths
 	chambers = [map(lambda x: root + directory + "/" + x, os.listdir(root + directory)) for directory in os.listdir(root) if not directory.startswith('.')]
-	# list of strings (representing an entire compiled chamber)
-	compiled_chambers = [compileChamberLayers(layers) for layers in chambers]
+	# create list of chamber objects
+	compiled_chambers = [compileChamber(layers) for layers in chambers]
 	json_out = {"chambers":compiled_chambers}
 	# write out to json file
-	open("compiled.json", "w+").write(json.dumps(json_out))
+	with open("compiled.json", "w+") as output:
+		# next line is for printing out readable json
+		# output.write(json.dumps(json_out, indent=2, sort_keys=True)) 
+		output.write(json.dumps(json_out))
 	print("Files saved to compiled.json")
 	
 if __name__ == "__main__":
