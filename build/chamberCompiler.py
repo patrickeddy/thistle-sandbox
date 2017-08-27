@@ -15,11 +15,15 @@ def compileChamberLayers(chambers): return [compileChamber(layer) for layer in c
 # eg 'chamber1_fg.png'
 # returns string
 def compileChamber(layer):
-	pixels = Image.open(layer).load()
+	image = Image.open(layer)
+	pixels = image.load()
 	compile_string = ""
 	for x in range(image.size[0]):
 		for y in range(image.size[1]):
-			compile_string += conversions.get(",".join(map(str, pixels[x,y]))) + ","
+			try:
+				compile_string += conversions.get(",".join(map(str, pixels[x,y]))) + ","
+			except(TypeError):
+				raise ValueError("Pixel [{}, {}] in {} does not correspond to a valid object.\nThe pixel's value is {}".format(str(x), str(y), layer, pixels[x,y]))
 	return compile_string
 
 def main():
