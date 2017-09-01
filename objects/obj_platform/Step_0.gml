@@ -1,12 +1,9 @@
 /// @description Platform step event
 
-with (obj_player) {
-	if (place_meeting(x, y + vsp, other)) {
-		if (vsp > 0) {
-			while (!place_meeting(x, y+sign(vsp), other)){
-				y += sign(vsp)
-			}
-			vsp = 0
-		}	
+if (instance_exists(obj_player)){
+	if (y < obj_player.y + round(obj_player.sprite_height/2)-1){
+		mask_index = -1;
+	} else {
+		mask_index = spr_platform;
 	}
 }
