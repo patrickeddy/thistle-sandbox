@@ -9,7 +9,11 @@ jump = keyboard_check_pressed(vk_space);
 if (left + right == 0) {
 	hsp = (hsp - (hsp * AIR_FRICTION)); // if not actively moving sideways, add a skid
 } else {
-	hsp = (left + right) * spd; // move sideways
+	if (abs(hsp) < HSP_CAP * .2){ // if 20% of the cap
+		 hsp += (left + right) * spd * AIR_FRICTION; // move sideways with some friction
+	} else {
+		hsp = (left + right) * spd; // move sideways
+	}
 }
 		
 
