@@ -6,7 +6,12 @@ right = keyboard_check(ord("D"));
 jump = keyboard_check_pressed(vk_space);
 
 // figure out the movement direction
-hsp = (left + right) * spd;
+if (left + right == 0) {
+	hsp = (hsp - (hsp * AIR_FRICTION)); // if not actively moving sideways, add a skid
+} else {
+	hsp = (left + right) * spd; // move sideways
+}
+		
 
 // add some gravity
 if (vsp < VSP_CAP){
@@ -14,8 +19,8 @@ if (vsp < VSP_CAP){
 }
 
 // enable jump
-if (place_meeting(x, y + 1, obj_wall)
-	&& jump) {
+if ((place_meeting(x, y + 1, obj_wall) && jump)// wall below
+	|| (place_meeting(x+1, y, obj_wall) || place_meeting(x-1, y, obj_wall)) && jump) { // wall beside
 	vsp = -jumpspd;
 }
 
