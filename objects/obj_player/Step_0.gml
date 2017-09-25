@@ -12,6 +12,7 @@ right = (haxis == 1);
 jump = gamepad_button_check_pressed(0, gp_face1);
 jump_down = gamepad_button_check(0, gp_face1);
 jump_release = gamepad_button_check_released(0, gp_face1);
+attack = gamepad_button_check(0, gp_face3);
 dash = gamepad_button_check_pressed(0, gp_shoulderlb) || gamepad_button_check_pressed(0, gp_shoulderrb);
 
 //// keyboard
@@ -39,14 +40,25 @@ if (left + right == 0) { // if we're not actively moving horizontally, and we're
 	if (hsp < 0) image_xscale = -1; // flip if moving left
 }
 
-// handle dash
-if (dashcounter != 0) {
-	hsp = hsp + sign(hsp) * dashspd; // do some dashing
-	dashcounter--; // tell little thistle that she can't dash forever, silly
-} else if (dash && dashcounter == 0) { // if the cooldown is 0, and dash is pressed
-	dashcounter = DASH_COOLDOWN; // reset the cooldown so we can DASH!
+// dash
+if (dashing){
+	dashcounter++;
+	// tell little thistle that she can't dash forever, silly
+	if (dashcounter / room_speed < DASH_COOLDOWN) { 
+		hsp = hsp + sign(hsp) * dashspd;
+	} else {
+		dashing = false;
+	}
+} else if (dash) {
+	dashcounter = 0;
+	dashing = true;
 }
 
+if (attack){
+	image_yscale = -1;
+} else {
+	image_yscale = 1;
+}
 
 
 // add some gravity
@@ -79,6 +91,7 @@ if (place_meeting(x + hsp, y, obj_wall)){
 		x += sign(hsp);
 		}
 		hsp = 0;
+		jumpcounter = 0;
 	}
 }
 

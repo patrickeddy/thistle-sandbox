@@ -13,8 +13,8 @@ AIR_FRICTION = 0.25
 WALLJUMP_COOLDOWN = 35
 WALLJUMP_KNOCK = 15
 
-dashspd = 20;
-DASH_COOLDOWN = 15;
+dashspd = 10
+DASH_COOLDOWN = 1; // seconds
 
 // VARIABLES (best not to touch)
 hsp = 0
@@ -25,4 +25,5 @@ canwalljump = true
 walljumpcounter = 0
 walljumping = false
 dashcounter = 0
+dashing = false
 grav = 0.8
