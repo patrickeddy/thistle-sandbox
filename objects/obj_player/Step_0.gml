@@ -12,7 +12,7 @@ if (left + right == 0) { // if we're not actively moving horizontally, and we're
 	sprite_index = spr_player;
 	if (!walljumping){
 		hsp = 0;
-		if (place_meeting(x, y+1, obj_wall)) hsp -= hsp * GROUND_FRICTION; // if on the ground and not actively moving sideways, add a skid
+		if (place_meeting(x, y+1, obj_wall)) hsp = hsp * GROUND_FRICTION; // if on the ground and not actively moving sideways, add a skid
 	}
 } else {
 	walljumping = false; // cancel walljumping
@@ -62,6 +62,7 @@ if (place_meeting(x, y + vsp, obj_wall)){
 		y += sign(vsp);
 		}
 		vsp = 0;
+		walljumping = false;
 	}
 }	
 	
