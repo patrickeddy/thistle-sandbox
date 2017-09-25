@@ -1,18 +1,31 @@
 /// @description Player movement and animation.
 
 // get input
-left = -keyboard_check(ord("A"));
-right = keyboard_check(ord("D"));
-jump = keyboard_check_pressed(vk_space);
-jump_down = keyboard_check(vk_space);
-jump_release = keyboard_check_released(vk_space);
+
+//FIXME: !!!!!! SHOULD BE USED FOR DEBUGGING ONLY !!!!!
+if (gamepad_button_check(0, gp_select)) game_end(); // end the game on 'back' pressed
+
+// controller
+haxis = gamepad_axis_value(0, gp_axislh);
+left = -(haxis == -1);
+right = (haxis == 1);
+jump = gamepad_button_check_pressed(0, gp_face1);
+jump_down = gamepad_button_check(0, gp_face1);
+jump_release = gamepad_button_check_released(0, gp_face1);
+dash = gamepad_button_check_pressed(0, gp_shoulderlb) || gamepad_button_check_pressed(0, gp_shoulderrb);
+
+//// keyboard
+//left = -keyboard_check(ord("A"));
+//right = keyboard_check(ord("D"));
+//jump = keyboard_check_pressed(vk_space);
+//jump_down = keyboard_check(vk_space);
+//jump_release = keyboard_check_released(vk_space);
 
 // figure out the movement direction
 if (left + right == 0) { // if we're not actively moving horizontally, and we're not walljumping
 	sprite_index = spr_player;
 	if (!walljumping){
 		hsp = 0;
-		if (place_meeting(x, y+1, obj_wall)) hsp = hsp * GROUND_FRICTION; // if on the ground and not actively moving sideways, add a skid
 	}
 } else {
 	walljumping = false; // cancel walljumping
@@ -23,30 +36,20 @@ if (left + right == 0) { // if we're not actively moving horizontally, and we're
 	}
 	sprite_index = spr_player_running;
 	if (hsp > 0) image_xscale = 1;
-	if (hsp < 0) image_xscale = -1;
+	if (hsp < 0) image_xscale = -1; // flip if moving left
 }
 
-// variable jump
-if (jump) jumpcounter = 0;
-if (jump_down) jumpcounter++;
-if (jump_release) {
-	if (jumpcounter / room_speed >= 1) vsp *= 2.0; // jump a bit higher
-}
-show_debug_message("counter:" + string(jumpcounter));
-
-
-if (jumping
-	&& !jump_release) {
-	jumpcounter++;
-} else {
-	jumpcounter = 0;
-	jumping = false;
+// handle dash
+if (dashcounter != 0) {
+	hsp = hsp + sign(hsp) * dashspd; // do some dashing
+	dashcounter--; // tell little thistle that she can't dash forever, silly
+} else if (dash && dashcounter == 0) { // if the cooldown is 0, and dash is pressed
+	dashcounter = DASH_COOLDOWN; // reset the cooldown so we can DASH!
 }
 
 
 
 // add some gravity
-
 if (vsp < grav){ // if on the down side of the jump curve
 	if (vsp + grav < VSP_CAP) vsp += grav; // normal gravity
 } else {
@@ -63,6 +66,7 @@ if (place_meeting(x, y + vsp, obj_wall)){
 		}
 		vsp = 0;
 		walljumping = false;
+		jumpcounter = 0;
 	}
 }	
 	
@@ -78,14 +82,21 @@ if (place_meeting(x + hsp, y, obj_wall)){
 	}
 }
 
+// double jump
+if (jump_release) jumpcounter++;
+if (jumpcounter == 1 && jump_down){
+	jumpcounter++;
+	vsp = -jumpspd;
+}
+
 // enable jump
 if (!jumping 
 	&& ((place_meeting(x, y + 1, obj_wall) && jump)// wall below
 	||  (place_meeting(x+1, y, obj_wall) || place_meeting(x-1, y, obj_wall)) && jump && walljumpcounter == 0)) { // wall beside
 		vsp = -jumpspd;
-		jumping = true;
 		// if walljumping, add some jump 'knock'
 		if (!place_meeting(x, y + 1, obj_wall)){ // make sure we're in the air
+			jumpcounter = 0; // disable the double jump while wall jumping
 			walljumping = true;
 			walljumpcounter = WALLJUMP_COOLDOWN;
 			if (place_meeting(x-1, y, obj_wall)){ // walljump left side
