@@ -1,11 +1,6 @@
 /// @description Player movement and animation.
 
 // get input
-
-//FIXME: !!!!!! SHOULD BE USED FOR DEBUGGING ONLY !!!!!
-if (gamepad_button_check(0, gp_select)) game_end(); // end the game on 'back' pressed
-
-// controller
 haxis = gamepad_axis_value(0, gp_axislh);
 left = -((haxis == -1) || keyboard_check(ord("A")));
 right = (haxis == 1) || keyboard_check(ord("D"));
@@ -16,6 +11,12 @@ attack = gamepad_button_check(0, gp_face3) || keyboard_check(vk_enter);
 dash = gamepad_button_check_pressed(0, gp_shoulderlb) 
 	|| gamepad_button_check_pressed(0, gp_shoulderrb) 
 	|| keyboard_check_pressed(vk_shift);
+
+show_debug_message("left: " + string(left));
+show_debug_message("right: " + string(right));
+show_debug_message("jump: " + string(jump));
+show_debug_message("attack: " + string(attack))
+show_debug_message("dash: " + string(dash))
 
 // figure out the movement direction
 if (left + right == 0) { // if we're not actively moving horizontally, and we're not walljumping
@@ -67,7 +68,7 @@ if (attack
 
 // stage2 of attack
 if (attack
-	&& attackpress == 1
+	&& attackpress >= 1
 	&& (attackcounter/room_speed) >= STAGE_2_ATTACK_WINDOW){
 	sprite_index = spr_player_sword_attack2;
 	attackpress += 1;
@@ -81,11 +82,10 @@ if (attack
 	attackpress += 1;
 }
 
-first_attack = (attackpress == 3
-	&& (attackcounter/room_speed) >= (STAGE_2_ATTACK_WINDOW + STAGE_3_ATTACK_WINDOW + STAGE_3_LENGTH));
-second_attack = (attackpress == 2
+third_attack = (attackpress == 3 && (attackcounter/room_speed) >= (STAGE_2_ATTACK_WINDOW + STAGE_3_ATTACK_WINDOW + STAGE_3_LENGTH));
+second_attack = (attackpress >= 2
 	&& (attackcounter/room_speed) >= STAGE_2_ATTACK_WINDOW + STAGE_2_LENGTH);
-third_attack = (attackpress == 1
+first_attack = (attackpress == 1
 	&& (attackcounter/room_speed) >= STAGE_1_LENGTH);
 
 // end after animations
@@ -116,38 +116,8 @@ if (jumpcounter == 1 && jump_down){
 	vsp = -jumpspd;
 }
 
-// enable jump
-if (!jumping 
-	&& ((place_meeting(x, y + 1, obj_wall) && jump)// wall below
-	||  (place_meeting(x+1, y, obj_wall) || place_meeting(x-1, y, obj_wall)) && jump && walljumpcounter == 0)) { // wall beside
-		vsp = -jumpspd;
-		// if walljumping, add some jump 'knock'
-		if (!place_meeting(x, y + 1, obj_wall)){ // make sure we're in the air
-			jumpcounter = 0; // disable the double jump while wall jumping
-			walljumping = true;
-			walljumpcounter = WALLJUMP_COOLDOWN;
-			if (place_meeting(x-1, y, obj_wall)){ // walljump left side
-				hsp = +WALLJUMP_KNOCK; 
-				sprite_index = spr_player_walljump; 
-				image_xscale = -1;
-			}
-			if (place_meeting(x+1, y, obj_wall)){ // walljump right side
-				hsp = -WALLJUMP_KNOCK;
-				sprite_index = spr_player_walljump;
-				image_xscale = 1;
-			}
-		}
-}
-
-if (walljumpcounter > 0) walljumpcounter--;
-
 // wall collision - vertical
 if (place_meeting(x, y + vsp, obj_wall)){
-	if (place_meeting(x+1, y + 1, obj_wall)){ // prevents corner-bug
-		if (attacking){ // preventing strange wall paranormality
-			vsp = 0;
-		}
-	}
 	while (!place_meeting(x, y + sign(vsp), obj_wall)){
 		y += sign(vsp);
 	}
@@ -164,6 +134,32 @@ if (place_meeting(x + hsp, y, obj_wall)){
 	hsp = 0;
 }
 
+// enable jump
+if (!jumping 
+	&& ((place_meeting(x, y + 1, obj_wall) && jump)// wall below
+	||  (place_meeting(x+1, y, obj_wall) || place_meeting(x-1, y, obj_wall)) && jump && walljumpcounter == 0)) { // wall beside
+	vsp = -jumpspd;
+	// if walljumping, add some jump 'knock'
+	if (!place_meeting(x, y + 1, obj_wall)){ // make sure we're in the air
+		jumpcounter = 0; // disable the double jump while wall jumping
+		walljumping = true;
+		walljumpcounter = WALLJUMP_COOLDOWN;
+		if (place_meeting(x-1, y, obj_wall)){ // walljump left side
+			hsp = +WALLJUMP_KNOCK; 
+			sprite_index = spr_player_walljump; 
+			image_xscale = -1;
+		}
+		if (place_meeting(x+1, y, obj_wall)){ // walljump right side
+			hsp = -WALLJUMP_KNOCK;
+			sprite_index = spr_player_walljump;
+			image_xscale = 1;
+		}
+	}
+}
+
+if (walljumpcounter > 0) walljumpcounter--;
+
+show_debug_message("attackcounter: " + string(attackcounter / room_speed))
 show_debug_message("walljump counter: " + string(walljumpcounter));
 
 x += hsp;
