@@ -191,6 +191,25 @@
             }
         },
         {
+            "Key": "46617393-6976-4ff7-a2b1-7968f7142d2e",
+            "Value": {
+                "id": "e2d33bd2-0a26-47df-b99a-c4c09af62e19",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "views\/46617393-6976-4ff7-a2b1-7968f7142d2e.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "47e998b4-8da0-4034-b2b7-f17cf1877498",
             "Value": {
                 "id": "3607eb84-9e45-45ab-8d15-8f9e995aa619",
@@ -248,9 +267,9 @@
             }
         },
         {
-            "Key": "7d1b0c77-f4a0-411b-8d3f-26a5c5dc93be",
+            "Key": "616d8abc-1a0d-4595-a3f0-397c6aba53d2",
             "Value": {
-                "id": "0628057c-2dfb-498e-82a8-22863623902f",
+                "id": "cf2ced12-8dac-4d2d-9036-2d4cf87f8876",
                 "modelName": "GMResourceInfo",
                 "mvc": "1.0",
                 "configDeltaFiles": [
@@ -262,8 +281,27 @@
                 "resourceCreationConfigs": [
                     "default"
                 ],
-                "resourcePath": "rooms\/rm_static\/rm_static.yy",
-                "resourceType": "GMRoom"
+                "resourcePath": "sprites\/spr_player_sword_attack2\/spr_player_sword_attack2.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "646800fd-f054-46b6-a372-7c2884d17168",
+            "Value": {
+                "id": "95d52b31-a95f-4980-97cd-da87cdd271e2",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "views\/646800fd-f054-46b6-a372-7c2884d17168.yy",
+                "resourceType": "GMFolder"
             }
         },
         {
@@ -381,6 +419,44 @@
             }
         },
         {
+            "Key": "a87c8bbe-6b66-4087-9d9d-0cfa0651252f",
+            "Value": {
+                "id": "ebeb96e8-72d6-4cb7-81dc-c2df95b1c9f0",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "sprites\/spr_mob_spider\/spr_mob_spider.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "a90a2271-0d98-415c-a700-1573b2cffaef",
+            "Value": {
+                "id": "ca0c13d2-eacf-4c93-8491-43ded47b9530",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "sprites\/spr_player_sword_attack\/spr_player_sword_attack.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "a9188620-a624-4a5a-83ae-a1b53faf038b",
             "Value": {
                 "id": "0f768a6e-efa6-470c-a081-65036ad82c3e",
@@ -397,6 +473,25 @@
                 ],
                 "resourcePath": "options\/linux\/options_linux.yy",
                 "resourceType": "GMLinuxOptions"
+            }
+        },
+        {
+            "Key": "b5071ae0-ff82-4186-90c4-15839a6ee894",
+            "Value": {
+                "id": "247992b9-5992-4f74-b7a2-c4cf848ae39f",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "objects\/obj_mob_spider\/obj_mob_spider.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -663,6 +758,25 @@
                 ],
                 "resourcePath": "objects\/obj_dungeon_master\/obj_dungeon_master.yy",
                 "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "f361583f-4d7f-4c94-a379-e31d19726731",
+            "Value": {
+                "id": "677573c8-7ef6-4f0e-a22f-308b029d2cac",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "views\/f361583f-4d7f-4c94-a379-e31d19726731.yy",
+                "resourceType": "GMFolder"
             }
         },
         {

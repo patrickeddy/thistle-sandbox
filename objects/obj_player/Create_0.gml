@@ -16,6 +16,13 @@ WALLJUMP_KNOCK = 15
 dashspd = 10
 DASH_COOLDOWN = 1; // seconds
 
+ATTACK_COOLDOWN = 0.9
+STAGE_2_ATTACK_WINDOW = 0.3
+STAGE_2_LENGTH = 0.5
+attackcounter = 0
+attackpress = 0
+attacking = false
+
 // VARIABLES (best not to touch)
 hsp = 0
 vsp = 0
@@ -27,3 +34,4 @@ walljumping = false
 dashcounter = 0
 dashing = false
 grav = 0.8
+

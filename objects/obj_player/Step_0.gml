@@ -7,24 +7,19 @@ if (gamepad_button_check(0, gp_select)) game_end(); // end the game on 'back' pr
 
 // controller
 haxis = gamepad_axis_value(0, gp_axislh);
-left = -(haxis == -1);
-right = (haxis == 1);
-jump = gamepad_button_check_pressed(0, gp_face1);
-jump_down = gamepad_button_check(0, gp_face1);
-jump_release = gamepad_button_check_released(0, gp_face1);
-attack = gamepad_button_check(0, gp_face3);
-dash = gamepad_button_check_pressed(0, gp_shoulderlb) || gamepad_button_check_pressed(0, gp_shoulderrb);
-
-//// keyboard
-//left = -keyboard_check(ord("A"));
-//right = keyboard_check(ord("D"));
-//jump = keyboard_check_pressed(vk_space);
-//jump_down = keyboard_check(vk_space);
-//jump_release = keyboard_check_released(vk_space);
+left = -((haxis == -1) || keyboard_check(ord("A")));
+right = (haxis == 1) || keyboard_check(ord("D"));
+jump = gamepad_button_check_pressed(0, gp_face1) || keyboard_check_pressed(vk_space);
+jump_down = gamepad_button_check(0, gp_face1) || keyboard_check(vk_space);
+jump_release = gamepad_button_check_released(0, gp_face1) || keyboard_check_released(vk_space);
+attack = gamepad_button_check(0, gp_face3) || keyboard_check(vk_enter);
+dash = gamepad_button_check_pressed(0, gp_shoulderlb) 
+	|| gamepad_button_check_pressed(0, gp_shoulderrb) 
+	|| keyboard_check_pressed(vk_shift);
 
 // figure out the movement direction
 if (left + right == 0) { // if we're not actively moving horizontally, and we're not walljumping
-	sprite_index = spr_player;
+	if (!attacking) sprite_index = spr_player;
 	if (!walljumping){
 		hsp = 0;
 	}
@@ -35,7 +30,7 @@ if (left + right == 0) { // if we're not actively moving horizontally, and we're
 	} else {
 		hsp = (left + right) * spd; // move normal speed
 	}
-	sprite_index = spr_player_running;
+	if (!attacking) sprite_index = spr_player_running;
 	if (hsp > 0) image_xscale = 1;
 	if (hsp < 0) image_xscale = -1; // flip if moving left
 }
@@ -54,11 +49,44 @@ if (dashing){
 	dashing = true;
 }
 
-if (attack){
-	image_yscale = -1;
-} else {
-	image_yscale = 1;
+
+
+// attacking logic
+if (attacking){
+	attackcounter += 1;
 }
+
+// if hit attack while not attacking (fresh)
+if (attack 
+	&& (attackcounter == 0)){
+	attacking = true;
+	attackpress += 1;
+	sprite_index = spr_player_sword_attack;
+	
+}
+// stage2 of attack
+if(attack
+	&& (attackcounter/room_speed) >= STAGE_2_ATTACK_WINDOW){
+	sprite_index = spr_player_sword_attack2;
+	attackpress += 1;
+}
+// end after first part animation
+if (attackpress <= 1
+	&& (attackcounter/room_speed) >= STAGE_2_LENGTH) { 
+	sprite_index = spr_player;
+	attacking = false;
+	attackcounter = 0;
+	attackpress = 0;
+}
+// end after total animation
+if ((attackcounter/room_speed) >= ATTACK_COOLDOWN) { 
+	sprite_index = spr_player;
+	attacking = false;
+	attackcounter = 0;
+	attackpress = 0;
+}
+
+
 
 
 // add some gravity
@@ -71,10 +99,12 @@ if (vsp < grav){ // if on the down side of the jump curve
 // wall collision - vertical
 if (place_meeting(x, y + vsp, obj_wall)){
 	if (place_meeting(x, y - vsp, obj_wall)){ // prevents corner-bug
-		// corner-bug stub
+		if (attacking){ // preventing strange wall paranormality
+			vsp = 0;	
+		}
 	} else {
-		while (!place_meeting(x, y+sign(vsp), obj_wall)){
-		y += sign(vsp);
+		while (!place_meeting(x, y+sign(vsp), obj_wall) && !attacking){
+			y += sign(vsp);
 		}
 		vsp = 0;
 		walljumping = false;
