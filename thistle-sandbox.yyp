@@ -210,6 +210,25 @@
             }
         },
         {
+            "Key": "4713e6a4-a075-40ab-86fb-cc331708aa30",
+            "Value": {
+                "id": "d4223146-1054-4249-929f-0d74fc75cbdf",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "sprites\/spr_player_sword_attack\/spr_player_sword_attack.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "47e998b4-8da0-4034-b2b7-f17cf1877498",
             "Value": {
                 "id": "3607eb84-9e45-45ab-8d15-8f9e995aa619",
@@ -267,6 +286,25 @@
             }
         },
         {
+            "Key": "599f370b-ba88-4bf6-a7dc-0b42bc71ead8",
+            "Value": {
+                "id": "492acd94-fc84-4fa8-9437-b3a566691f6f",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "sprites\/spr_player_sword_attack3\/spr_player_sword_attack3.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "616d8abc-1a0d-4595-a3f0-397c6aba53d2",
             "Value": {
                 "id": "cf2ced12-8dac-4d2d-9036-2d4cf87f8876",
@@ -281,7 +319,7 @@
                 "resourceCreationConfigs": [
                     "default"
                 ],
-                "resourcePath": "sprites\/spr_player_sword_attack2\/spr_player_sword_attack2.yy",
+                "resourcePath": "sprites\/spr_player_sword_attack2_OLD\/spr_player_sword_attack2_OLD.yy",
                 "resourceType": "GMSprite"
             }
         },
@@ -321,6 +359,25 @@
                 ],
                 "resourcePath": "views\/82472c25-6c14-4fa2-922b-8c70be9b6a49.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "85dc182f-b26e-4941-b724-7c4e83d38c71",
+            "Value": {
+                "id": "39a729d2-76ff-4341-80dd-ea34c1ad8c86",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "sprites\/spr_player_sword_attack2\/spr_player_sword_attack2.yy",
+                "resourceType": "GMSprite"
             }
         },
         {
@@ -452,7 +509,7 @@
                 "resourceCreationConfigs": [
                     "default"
                 ],
-                "resourcePath": "sprites\/spr_player_sword_attack\/spr_player_sword_attack.yy",
+                "resourcePath": "sprites\/spr_player_sword_attack_OLD\/spr_player_sword_attack_OLD.yy",
                 "resourceType": "GMSprite"
             }
         },
