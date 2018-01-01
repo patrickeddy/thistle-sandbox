@@ -100,29 +100,24 @@ if (vsp < grav){ // if on the down side of the jump curve
 if (place_meeting(x, y + vsp, obj_wall)){
 	if (place_meeting(x, y - vsp, obj_wall)){ // prevents corner-bug
 		if (attacking){ // preventing strange wall paranormality
-			vsp = 0;	
+			vsp = 0;
 		}
-	} else {
-		while (!place_meeting(x, y+sign(vsp), obj_wall) && !attacking){
-			y += sign(vsp);
-		}
-		vsp = 0;
-		walljumping = false;
-		jumpcounter = 0;
 	}
+	while (!place_meeting(x, y+sign(vsp), obj_wall)){
+		y += sign(vsp);
+	}
+	vsp = 0;
+	walljumping = false;
+	jumpcounter = 0;
 }	
 	
 // wall collision - horizontal
 if (place_meeting(x + hsp, y, obj_wall)){
-	if (place_meeting(x - hsp, y, obj_wall)){ // prevents corner-bug
-		// corner-bug stub
-	} else {
-		while (!place_meeting(x+sign(hsp), y, obj_wall)){
+	while (!place_meeting(x+sign(hsp), y, obj_wall)){
 		x += sign(hsp);
-		}
-		hsp = 0;
-		jumpcounter = 0;
 	}
+	hsp = 0;
+	jumpcounter = 0;
 }
 
 // double jump
