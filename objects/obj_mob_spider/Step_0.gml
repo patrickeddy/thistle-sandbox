@@ -16,12 +16,12 @@ if (object_exists(obj_player)){
 		&& obj_player.attacking){
 		if (damagecount == 0){
 			damagecount += 1;	
-			hp -= 10;
+			hp -= obj_player.atk;
 			image_blend = c_red;
 		}
 		if (obj_player.attackpress > 1){
 			damagecount += 1;
-			hp -= 20;
+			hp -= obj_player.atk;
 			image_blend = c_blue;
 		}
 	} else {
