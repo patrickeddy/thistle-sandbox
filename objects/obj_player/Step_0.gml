@@ -7,24 +7,19 @@ if (gamepad_button_check(0, gp_select)) game_end(); // end the game on 'back' pr
 
 // controller
 haxis = gamepad_axis_value(0, gp_axislh);
-left = -(haxis == -1);
-right = (haxis == 1);
-jump = gamepad_button_check_pressed(0, gp_face1);
-jump_down = gamepad_button_check(0, gp_face1);
-jump_release = gamepad_button_check_released(0, gp_face1);
-attack = gamepad_button_check(0, gp_face3);
-dash = gamepad_button_check_pressed(0, gp_shoulderlb) || gamepad_button_check_pressed(0, gp_shoulderrb);
-
-//// keyboard
-//left = -keyboard_check(ord("A"));
-//right = keyboard_check(ord("D"));
-//jump = keyboard_check_pressed(vk_space);
-//jump_down = keyboard_check(vk_space);
-//jump_release = keyboard_check_released(vk_space);
+left = -((haxis == -1) || keyboard_check(ord("A")));
+right = (haxis == 1) || keyboard_check(ord("D"));
+jump = gamepad_button_check_pressed(0, gp_face1) || keyboard_check_pressed(vk_space);
+jump_down = gamepad_button_check(0, gp_face1) || keyboard_check(vk_space);
+jump_release = gamepad_button_check_released(0, gp_face1) || keyboard_check_released(vk_space);
+attack = gamepad_button_check(0, gp_face3) || keyboard_check(vk_enter);
+dash = gamepad_button_check_pressed(0, gp_shoulderlb) 
+	|| gamepad_button_check_pressed(0, gp_shoulderrb) 
+	|| keyboard_check_pressed(vk_shift);
 
 // figure out the movement direction
 if (left + right == 0) { // if we're not actively moving horizontally, and we're not walljumping
-	sprite_index = spr_player;
+	if (!attacking) sprite_index = spr_player;
 	if (!walljumping){
 		hsp = 0;
 	}
@@ -35,7 +30,7 @@ if (left + right == 0) { // if we're not actively moving horizontally, and we're
 	} else {
 		hsp = (left + right) * spd; // move normal speed
 	}
-	sprite_index = spr_player_running;
+	if (!attacking) sprite_index = spr_player_running;
 	if (hsp > 0) image_xscale = 1;
 	if (hsp < 0) image_xscale = -1; // flip if moving left
 }
@@ -54,11 +49,65 @@ if (dashing){
 	dashing = true;
 }
 
-if (attack){
-	image_yscale = -1;
-} else {
-	image_yscale = 1;
+
+
+// attacking logic
+if (attacking){
+	attackcounter += 1;
 }
+
+// if hit attack while not attacking (fresh)
+if (attack 
+	&& (attackcounter == 0)){
+	attacking = true;
+	attackpress += 1;
+	sprite_index = spr_player_sword_attack;
+	
+}
+// stage2 of attack
+if (attack
+	&& attackpress == 1
+	&& (attackcounter/room_speed) >= STAGE_2_ATTACK_WINDOW){
+	sprite_index = spr_player_sword_attack2;
+	attackpress += 1;
+}
+
+// stage3 of attack
+if (attack
+	&& attackpress >= 2
+	&& (attackcounter/room_speed) >= (STAGE_2_ATTACK_WINDOW + STAGE_3_ATTACK_WINDOW)){
+	sprite_index = spr_player_sword_attack3;
+	attackpress += 1;
+}
+
+// end after third part animation
+if (attackpress > 2
+	&& (attackcounter/room_speed) >= (STAGE_2_ATTACK_WINDOW + STAGE_3_ATTACK_WINDOW + STAGE_3_LENGTH)) { 
+	sprite_index = spr_player;
+	attacking = false;
+	attackcounter = 0;
+	attackpress = 0;
+}
+
+// end after second part animation
+if (attackpress == 2
+	&& (attackcounter/room_speed) >= STAGE_2_ATTACK_WINDOW + STAGE_2_LENGTH) { 
+	sprite_index = spr_player;
+	attacking = false;
+	attackcounter = 0;
+	attackpress = 0;
+}
+
+// end after first part animation
+if (attackpress == 1
+	&& (attackcounter/room_speed) >= STAGE_1_LENGTH) { 
+	sprite_index = spr_player;
+	attacking = false;
+	attackcounter = 0;
+	attackpress = 0;
+}
+
+
 
 
 // add some gravity
@@ -71,32 +120,28 @@ if (vsp < grav){ // if on the down side of the jump curve
 // wall collision - vertical
 if (place_meeting(x, y + vsp, obj_wall)){
 	if (place_meeting(x, y - vsp, obj_wall)){ // prevents corner-bug
-		// corner-bug stub
-	} else {
-		while (!place_meeting(x, y+sign(vsp), obj_wall)){
-		y += sign(vsp);
+		if (attacking){ // preventing strange wall paranormality
+			vsp = 0;
 		}
-		vsp = 0;
-		walljumping = false;
-		jumpcounter = 0;
 	}
+	while (!place_meeting(x, y+sign(vsp), obj_wall)){
+		y += sign(vsp);
+	}
+	if (sign(vsp) > 0) { jumpcounter = 0; } // reset the jump counter if touched the ground
+	vsp = 0;
+	walljumping = false;
 }	
 	
 // wall collision - horizontal
 if (place_meeting(x + hsp, y, obj_wall)){
-	if (place_meeting(x - hsp, y, obj_wall)){ // prevents corner-bug
-		// corner-bug stub
-	} else {
-		while (!place_meeting(x+sign(hsp), y, obj_wall)){
+	while (!place_meeting(x+sign(hsp), y, obj_wall)){
 		x += sign(hsp);
-		}
-		hsp = 0;
-		jumpcounter = 0;
 	}
+	hsp = 0;
 }
 
 // double jump
-if (jump_release) jumpcounter++;
+if (jump_release) { jumpcounter++; }
 if (jumpcounter == 1 && jump_down){
 	jumpcounter++;
 	vsp = -jumpspd;

@@ -7,12 +7,13 @@
     "HTile": false,
     "VTile": false,
     "bbox_bottom": 63,
-    "bbox_left": 13,
-    "bbox_right": 50,
+    "bbox_left": 0,
+    "bbox_right": 63,
     "bbox_top": 0,
-    "bboxmode": 2,
-    "colkind": 1,
+    "bboxmode": 1,
+    "colkind": 0,
     "coltolerance": 0,
+    "edgeFiltering": false,
     "frames": [
         {
             "id": "2b5f4907-e1b8-421f-a24a-e657b5fea997",
@@ -54,6 +55,7 @@
         }
     ],
     "origin": 4,
+    "originLocked": false,
     "playbackSpeed": 15,
     "playbackSpeedType": 0,
     "premultiplyAlpha": false,
