@@ -1,5 +1,8 @@
 /// @description Player variables
 
+MAX_SPEED = 15
+MIN_SPEED = 3
+SPEED_REGENERATE = .5
 // CONSTANTS (modifyable)
 spd = 15
 jumpspd = 14
@@ -23,7 +26,7 @@ STAGE_3_LENGTH = 1.0
 STAGE_2_ATTACK_WINDOW = 0.4
 STAGE_3_ATTACK_WINDOW = 0.5
 
-
+atk = 1
 attackcounter = 0
 attackpress = 0
 attacking = false
