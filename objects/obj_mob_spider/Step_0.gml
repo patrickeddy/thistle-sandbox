@@ -28,7 +28,11 @@ if (object_exists(obj_player)){
 		damagecount = 0;	
 		image_blend = -1;
 	}
-	if (hp <= 0) instance_destroy();
+	if (hp <= 0) {
+		drop_item(x, y, obj_heart_piece, 25);
+		drop_item(x, y, obj_boot, 5);
+		instance_destroy();
+	}
 }
 
 if (!place_meeting(x, y+vspd+1, obj_wall)){
