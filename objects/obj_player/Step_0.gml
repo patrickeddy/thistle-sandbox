@@ -68,7 +68,7 @@ if (attack
 
 // stage2 of attack
 if (attack
-	&& attackpress >= 1
+	&& attackpress == 1
 	&& (attackcounter/room_speed) >= STAGE_2_ATTACK_WINDOW){
 	sprite_index = spr_player_sword_attack2;
 	attackpress += 1;
@@ -116,6 +116,36 @@ if (jumpcounter == 1 && jump_down){
 	vsp = -jumpspd;
 }
 
+// enable jump
+if (!jumping 
+	&& ((place_meeting(x, y + 1, obj_wall) && jump)// wall below
+	||  (place_meeting(x+(sprite_width/2), y, obj_wall) || place_meeting(x-(sprite_width/2), y, obj_wall)) && jump && walljumpcounter == 0)) { // wall beside
+	vsp = -jumpspd;
+	// if walljumping, add some jump 'knock'
+	if (!(place_meeting(x, y + 1, obj_wall))){ // make sure we're in the air
+		jumpcounter = 0; // disable the double jump while wall jumping
+		walljumping = true;
+		walljumpcounter = WALLJUMP_COOLDOWN;
+		if (place_meeting(x-1, y, obj_wall)){ // walljump left side
+			show_debug_message("Eyyy - wall left side!");
+			hsp = +WALLJUMP_KNOCK;
+			vsp = -WALLJUMP_KNOCK;
+			sprite_index = spr_player_walljump; 
+			image_xscale = -1;
+		}
+		if (place_meeting(x+1, y, obj_wall)){ // walljump right side
+			show_debug_message("Eyyy - wall right side!");
+			hsp = -WALLJUMP_KNOCK;
+			vsp = -WALLJUMP_KNOCK;
+			sprite_index = spr_player_walljump;
+			image_xscale = 1;
+		}
+	}
+}
+
+if (walljumpcounter > 0) walljumpcounter--;
+
+
 // wall collision - vertical
 if (place_meeting(x, y + vsp, obj_wall)){
 	while (!place_meeting(x, y + sign(vsp), obj_wall)){
@@ -134,30 +164,7 @@ if (place_meeting(x + hsp, y, obj_wall)){
 	hsp = 0;
 }
 
-// enable jump
-if (!jumping 
-	&& ((place_meeting(x, y + 1, obj_wall) && jump)// wall below
-	||  (place_meeting(x+1, y, obj_wall) || place_meeting(x-1, y, obj_wall)) && jump && walljumpcounter == 0)) { // wall beside
-	vsp = -jumpspd;
-	// if walljumping, add some jump 'knock'
-	if (!place_meeting(x, y + 1, obj_wall)){ // make sure we're in the air
-		jumpcounter = 0; // disable the double jump while wall jumping
-		walljumping = true;
-		walljumpcounter = WALLJUMP_COOLDOWN;
-		if (place_meeting(x-1, y, obj_wall)){ // walljump left side
-			hsp = +WALLJUMP_KNOCK; 
-			sprite_index = spr_player_walljump; 
-			image_xscale = -1;
-		}
-		if (place_meeting(x+1, y, obj_wall)){ // walljump right side
-			hsp = -WALLJUMP_KNOCK;
-			sprite_index = spr_player_walljump;
-			image_xscale = 1;
-		}
-	}
-}
 
-if (walljumpcounter > 0) walljumpcounter--;
 
 show_debug_message("attackcounter: " + string(attackcounter / room_speed))
 show_debug_message("walljump counter: " + string(walljumpcounter));
