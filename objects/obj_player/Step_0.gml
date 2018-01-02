@@ -175,5 +175,9 @@ if (place_meeting(x + hsp, y, obj_wall)){
 show_debug_message("attackcounter: " + string(attackcounter / room_speed))
 show_debug_message("walljump counter: " + string(walljumpcounter));
 
+if (stunned) {
+	hsp = 0;	
+}
+
 x += hsp;
 y += vsp;

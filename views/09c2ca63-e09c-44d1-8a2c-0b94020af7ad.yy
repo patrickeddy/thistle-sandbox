@@ -6,7 +6,8 @@
     "children": [
         "b5071ae0-ff82-4186-90c4-15839a6ee894",
         "fb47f619-5bf6-4707-a073-519b2452a019",
-        "fac9aa12-2bee-4b90-8560-29584e96f0fa"
+        "fac9aa12-2bee-4b90-8560-29584e96f0fa",
+        "2d12a09f-186f-4738-bc50-ab0131d74ca1"
     ],
     "filterType": "GMObject",
     "folderName": "mobs",
