@@ -16,5 +16,4 @@ if (spd > MAX_SPEED) {
 if (hpiece_count == 5) {
 	max_hp++;
 	hpiece_count = 0;
-	image_blend = c_red;
 }

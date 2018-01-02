@@ -18,4 +18,6 @@ show_debug_message("camera_y: " + string(camera_y));
 
 draw_sprite(spr_hud_health, 0, 0, 0);
 draw_set_font(fnt_hud_health);
-draw_text(58, 12, string(hp_num));
+draw_text(58, 12, string(hp_num) + "/" + string(max_hp));
+draw_sprite(spr_heart_piece, 0, 130, 35);
+draw_text(150, 12, string(hpiece_num));

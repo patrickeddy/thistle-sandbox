@@ -12,17 +12,20 @@ if (place_meeting(x+hspd, y, obj_wall)){
 
 // player collision
 if (object_exists(obj_player)){
-	if (place_meeting(x, y, obj_player)
-		&& obj_player.attacking){
-		if (damagecount == 0){
-			damagecount += 1;	
-			hp -= obj_player.atk;
-			image_blend = c_red;
-		}
-		if (obj_player.attackpress > 1){
-			damagecount += 1;
-			hp -= obj_player.atk;
-			image_blend = c_blue;
+	if (place_meeting(x, y, obj_player)){
+		if (obj_player.attacking) { // attacking
+			if (damagecount == 0){
+				damagecount += 1;	
+				hp -= obj_player.atk;
+				image_blend = c_red;
+			}
+			if (obj_player.attackpress > 1){
+				damagecount += 1;
+				hp -= obj_player.atk;
+				image_blend = c_blue;
+			}	
+		} else { // not attacking
+			damage_player()
 		}
 	} else {
 		damagecount = 0;	

@@ -40,6 +40,8 @@ max_hp = 3;
 hpiece_count = 0;
 hp = 3;
 
+hit_cooldown = 0;
+
 hsp = 0
 vsp = 0
 jumping = false

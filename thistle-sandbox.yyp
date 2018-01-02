@@ -514,6 +514,25 @@
             }
         },
         {
+            "Key": "762f2e76-7220-43de-bb1c-a1ee6004eefc",
+            "Value": {
+                "id": "8ff29e1a-6027-497b-bbff-185a7650131b",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "scripts\/damage_player\/damage_player.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "7c08b637-6967-469f-b65d-1d472c870bd1",
             "Value": {
                 "id": "e60250d7-be01-434f-a2e9-257f23282d4d",
@@ -1354,7 +1373,8 @@
         "c0e20c01-eaa2-4ca3-b687-9181f9c218fe",
         "b06091e5-a088-447d-be2c-df23be3f478c",
         "8f3f6c32-5c2d-47b9-86ff-0ba11647b4af",
-        "86d70d14-c60d-4244-be83-5085f7333ade"
+        "86d70d14-c60d-4244-be83-5085f7333ade",
+        "762f2e76-7220-43de-bb1c-a1ee6004eefc"
     ],
     "tutorial": ""
 }

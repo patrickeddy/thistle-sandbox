@@ -25,9 +25,13 @@ if (can_fire && distance < 200) {
 // DAMAGE 
 
 if (object_exists(obj_player)){
-	if (place_meeting(x, y, obj_player) && obj_player.attacking) {
-		hp -= obj_player.atk;
-	} 
+	if (place_meeting(x, y, obj_player)) {
+		if (obj_player.attacking) { 
+			hp -= obj_player.atk; 
+		} else { 
+			damage_player(); 
+		}
+	}
 	if (hp <= 0) {
 		drop_item(x, y, obj_heart_piece, 25);
 		drop_item(x, y, obj_whetstone, 5);
