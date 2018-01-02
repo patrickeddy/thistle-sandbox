@@ -26,9 +26,6 @@ STAGE_3_LENGTH = 2.0
 STAGE_2_ATTACK_WINDOW = 0.25
 STAGE_3_ATTACK_WINDOW = 0.75
 
-max_hp = 3;
-hpiece_count = 0;
-hp = 3;
 
 atk = 1
 ATTACK_TIMEOUT = STAGE_2_ATTACK_WINDOW + STAGE_3_ATTACK_WINDOW + STAGE_3_LENGTH
@@ -38,6 +35,10 @@ attackpress = 0
 attacking = false
 
 // VARIABLES (best not to touch)
+
+max_hp = 3;
+hpiece_count = 0;
+hp = 3;
 
 hsp = 0
 vsp = 0

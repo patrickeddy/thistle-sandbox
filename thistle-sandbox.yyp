@@ -609,6 +609,25 @@
             }
         },
         {
+            "Key": "8a554449-02f6-46de-9e96-877f6d8f26ec",
+            "Value": {
+                "id": "d9976d28-9f30-4538-90a0-9f69d5f62c11",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "views\/8a554449-02f6-46de-9e96-877f6d8f26ec.yy",
+                "resourceType": "GMFolder"
+            }
+        },
+        {
             "Key": "8b5b1787-49a1-417b-9a41-d48f402fc7f5",
             "Value": {
                 "id": "d2318d30-b14f-449a-beb2-d92b753f236e",
@@ -625,6 +644,25 @@
                 ],
                 "resourcePath": "objects\/obj_player\/obj_player.yy",
                 "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "8bf26639-60ea-46fc-a2af-864110f5f8de",
+            "Value": {
+                "id": "3dc8f541-8574-46d7-a1fd-08d6cafb0a89",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "fonts\/fnt_hud_health\/fnt_hud_health.yy",
+                "resourceType": "GMFont"
             }
         },
         {
@@ -1156,6 +1194,25 @@
                     "default"
                 ],
                 "resourcePath": "objects\/obj_dungeon_master\/obj_dungeon_master.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
+            "Key": "ee51b514-f55c-4fad-8b20-cd453fcc0712",
+            "Value": {
+                "id": "e11bf344-1457-4752-b2ae-b147d617b9bb",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "objects\/obj_health\/obj_health.yy",
                 "resourceType": "GMObject"
             }
         },
