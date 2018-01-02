@@ -324,6 +324,25 @@
             }
         },
         {
+            "Key": "426fa77f-977c-48e2-b36d-ef193437e90c",
+            "Value": {
+                "id": "42539752-44a3-4d51-bad3-189e468b4cd9",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "sprites\/spr_heart_crystal\/spr_heart_crystal.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "44000761-5551-4645-bf25-c5a8c10c2afa",
             "Value": {
                 "id": "deeece1d-2ced-4966-8cc4-770ece30748b",
@@ -628,25 +647,6 @@
             }
         },
         {
-            "Key": "8a554449-02f6-46de-9e96-877f6d8f26ec",
-            "Value": {
-                "id": "d9976d28-9f30-4538-90a0-9f69d5f62c11",
-                "modelName": "GMResourceInfo",
-                "mvc": "1.0",
-                "configDeltaFiles": [
-                    
-                ],
-                "configDeltas": [
-                    
-                ],
-                "resourceCreationConfigs": [
-                    "default"
-                ],
-                "resourcePath": "views\/8a554449-02f6-46de-9e96-877f6d8f26ec.yy",
-                "resourceType": "GMFolder"
-            }
-        },
-        {
             "Key": "8b5b1787-49a1-417b-9a41-d48f402fc7f5",
             "Value": {
                 "id": "d2318d30-b14f-449a-beb2-d92b753f236e",
@@ -720,6 +720,44 @@
                 ],
                 "resourcePath": "datafiles_yy\/compiled.json.yy",
                 "resourceType": "GMIncludedFile"
+            }
+        },
+        {
+            "Key": "940acaaf-3ac4-4718-8a4e-4bad01f98535",
+            "Value": {
+                "id": "7dc09d1e-9464-4a51-82ba-d4c69ab0815b",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "sprites\/spr_heart_crystal_broken\/spr_heart_crystal_broken.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "945f2154-037f-46c0-981c-3dda3b068e3d",
+            "Value": {
+                "id": "f0fb40e5-d13d-411b-90e9-3d3b819a719d",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "objects\/obj_heart_crystal\/obj_heart_crystal.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -1213,25 +1251,6 @@
                     "default"
                 ],
                 "resourcePath": "objects\/obj_dungeon_master\/obj_dungeon_master.yy",
-                "resourceType": "GMObject"
-            }
-        },
-        {
-            "Key": "ee51b514-f55c-4fad-8b20-cd453fcc0712",
-            "Value": {
-                "id": "e11bf344-1457-4752-b2ae-b147d617b9bb",
-                "modelName": "GMResourceInfo",
-                "mvc": "1.0",
-                "configDeltaFiles": [
-                    
-                ],
-                "configDeltas": [
-                    
-                ],
-                "resourceCreationConfigs": [
-                    "default"
-                ],
-                "resourcePath": "objects\/obj_health\/obj_health.yy",
                 "resourceType": "GMObject"
             }
         },

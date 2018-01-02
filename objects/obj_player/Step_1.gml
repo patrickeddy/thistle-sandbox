@@ -15,5 +15,6 @@ if (spd > MAX_SPEED) {
 
 if (hpiece_count == 5) {
 	max_hp++;
+	hp = max_hp;
 	hpiece_count = 0;
 }
