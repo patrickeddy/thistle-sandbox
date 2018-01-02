@@ -1,5 +1,6 @@
 /// @description Player movement and animation.
 
+
 // get input
 haxis = gamepad_axis_value(0, gp_axislh);
 left = -((haxis == -1) || keyboard_check(ord("A")));

@@ -38,6 +38,7 @@ attackpress = 0
 attacking = false
 
 // VARIABLES (best not to touch)
+
 hsp = 0
 vsp = 0
 jumping = false
