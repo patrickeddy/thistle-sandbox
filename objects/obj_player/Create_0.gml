@@ -27,6 +27,7 @@ STAGE_2_ATTACK_WINDOW = 0.4
 STAGE_3_ATTACK_WINDOW = 0.5
 
 atk = 1
+ATTACK_TIMEOUT = STAGE_2_ATTACK_WINDOW + STAGE_3_ATTACK_WINDOW + STAGE_3_LENGTH
 attackcounter = 0
 attackpress = 0
 attacking = false

@@ -64,6 +64,7 @@ if (attack
 	sprite_index = spr_player_sword_attack;
 	
 }
+
 // stage2 of attack
 if (attack
 	&& attackpress == 1
@@ -80,27 +81,18 @@ if (attack
 	attackpress += 1;
 }
 
-// end after third part animation
-if (attackpress > 2
-	&& (attackcounter/room_speed) >= (STAGE_2_ATTACK_WINDOW + STAGE_3_ATTACK_WINDOW + STAGE_3_LENGTH)) { 
-	sprite_index = spr_player;
-	attacking = false;
-	attackcounter = 0;
-	attackpress = 0;
-}
+first_attack = (attackpress == 3
+	&& (attackcounter/room_speed) >= (STAGE_2_ATTACK_WINDOW + STAGE_3_ATTACK_WINDOW + STAGE_3_LENGTH));
+second_attack = (attackpress == 2
+	&& (attackcounter/room_speed) >= STAGE_2_ATTACK_WINDOW + STAGE_2_LENGTH);
+third_attack = (attackpress == 1
+	&& (attackcounter/room_speed) >= STAGE_1_LENGTH);
 
-// end after second part animation
-if (attackpress == 2
-	&& (attackcounter/room_speed) >= STAGE_2_ATTACK_WINDOW + STAGE_2_LENGTH) { 
-	sprite_index = spr_player;
-	attacking = false;
-	attackcounter = 0;
-	attackpress = 0;
-}
-
-// end after first part animation
-if (attackpress == 1
-	&& (attackcounter/room_speed) >= STAGE_1_LENGTH) { 
+// end after animations
+if (first_attack
+	|| second_attack
+	|| third_attack
+	|| (attackcounter/room_speed) > ATTACK_TIMEOUT) { 
 	sprite_index = spr_player;
 	attacking = false;
 	attackcounter = 0;
@@ -115,29 +107,6 @@ if (vsp < grav){ // if on the down side of the jump curve
 	if (vsp + grav < VSP_CAP) vsp += grav; // normal gravity
 } else {
 	if (vsp + 1.25 * grav < VSP_CAP) vsp += 1.5 * grav; // heavy gravity
-}
-
-// wall collision - vertical
-if (place_meeting(x, y + vsp, obj_wall)){
-	if (place_meeting(x, y - vsp, obj_wall)){ // prevents corner-bug
-		if (attacking){ // preventing strange wall paranormality
-			vsp = 0;
-		}
-	}
-	while (!place_meeting(x, y+sign(vsp), obj_wall)){
-		y += sign(vsp);
-	}
-	if (sign(vsp) > 0) { jumpcounter = 0; } // reset the jump counter if touched the ground
-	vsp = 0;
-	walljumping = false;
-}	
-	
-// wall collision - horizontal
-if (place_meeting(x + hsp, y, obj_wall)){
-	while (!place_meeting(x+sign(hsp), y, obj_wall)){
-		x += sign(hsp);
-	}
-	hsp = 0;
 }
 
 // double jump
@@ -171,6 +140,29 @@ if (!jumping
 }
 
 if (walljumpcounter > 0) walljumpcounter--;
+
+// wall collision - vertical
+if (place_meeting(x, y + vsp, obj_wall)){
+	if (place_meeting(x+1, y + 1, obj_wall)){ // prevents corner-bug
+		if (attacking){ // preventing strange wall paranormality
+			vsp = 0;
+		}
+	}
+	while (!place_meeting(x, y + sign(vsp), obj_wall)){
+		y += sign(vsp);
+	}
+	if (sign(vsp) > 0) { jumpcounter = 0; } // reset the jump counter if touched the ground
+	vsp = 0;
+	walljumping = false;
+}	
+	
+// wall collision - horizontal
+if (place_meeting(x + hsp, y, obj_wall)){
+	while (!place_meeting(x+sign(hsp), y, obj_wall)){
+		x += sign(hsp);
+	}
+	hsp = 0;
+}
 
 show_debug_message("walljump counter: " + string(walljumpcounter));
 
