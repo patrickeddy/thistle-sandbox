@@ -12,20 +12,19 @@ dash = gamepad_button_check_pressed(0, gp_shoulderlb)
 	|| gamepad_button_check_pressed(0, gp_shoulderrb) 
 	|| keyboard_check_pressed(vk_shift);
 
-show_debug_message("left: " + string(left));
-show_debug_message("right: " + string(right));
-show_debug_message("jump: " + string(jump));
-show_debug_message("attack: " + string(attack))
-show_debug_message("dash: " + string(dash))
+//show_debug_message("left: " + string(left));
+//show_debug_message("right: " + string(right));
+//show_debug_message("jump: " + string(jump));
+//show_debug_message("attack: " + string(attack))
+//show_debug_message("dash: " + string(dash))
 
 // figure out the movement direction
 if (left + right == 0) { // if we're not actively moving horizontally, and we're not walljumping
 	if (!attacking) sprite_index = spr_player;
 	if (!walljumping){
 		hsp = 0;
-	}
+	} 
 } else {
-	walljumping = false; // cancel walljumping
 	if (abs(hsp) < HSP_CAP * .2){ // if 20% of the cap
 		 hsp += (left + right) * spd * AIR_FRICTION; // move sideways with some friction
 	} else {
@@ -110,46 +109,75 @@ if (hit_cooldown != 0) {
 
 // add some gravity
 if (vsp < grav){ // if on the down side of the jump curve
-	if (vsp + grav < VSP_CAP) vsp += grav; // normal gravity
+	if (vsp + grav < VSP_CAP) { vsp += grav; } // normal gravity
 } else {
-	if (vsp + 1.25 * grav < VSP_CAP) vsp += 1.5 * grav; // heavy gravity
+	if (vsp + (1.25 * grav) < VSP_CAP) { vsp += 1.5 * grav; } // heavy gravity
 }
 
 // double jump
-if (jump_release) { jumpcounter++; }
-if (jumpcounter == 1 && jump_down){
-	jumpcounter++;
-	vsp = -jumpspd;
-}
+//if (jump_release) { jumpcounter++; }
+//if (jumpcounter == 1 && jump_down){
+//	jumpcounter++;
+//	vsp = -jumpspd;
+//}
 
-// enable jump
-if (!jumping 
-	&& ((place_meeting(x, y + 1, obj_wall) && jump)// wall below
-	||  (place_meeting(x+(sprite_width/2), y, obj_wall) || place_meeting(x-(sprite_width/2), y, obj_wall)) && jump && walljumpcounter == 0)) { // wall beside
-	vsp = -jumpspd;
-	// if walljumping, add some jump 'knock'
-	if (!(place_meeting(x, y + 1, obj_wall))){ // make sure we're in the air
-		jumpcounter = 0; // disable the double jump while wall jumping
-		walljumping = true;
-		walljumpcounter = WALLJUMP_COOLDOWN;
-		if (place_meeting(x-1, y, obj_wall)){ // walljump left side
-			show_debug_message("Eyyy - wall left side!");
+// jump
+if (jump 
+	&& (on_ground(x, y)
+	|| (on_wall(x, y) != obj_init.colliding_wall.NONE))
+	) { 
+	switch (on_wall(x, y)) {
+		case obj_init.colliding_wall.LEFT:
 			hsp = +WALLJUMP_KNOCK;
 			vsp = -WALLJUMP_KNOCK;
 			sprite_index = spr_player_walljump; 
 			image_xscale = -1;
-		}
-		if (place_meeting(x+1, y, obj_wall)){ // walljump right side
-			show_debug_message("Eyyy - wall right side!");
+			break;
+		case obj_init.colliding_wall.RIGHT:
 			hsp = -WALLJUMP_KNOCK;
 			vsp = -WALLJUMP_KNOCK;
 			sprite_index = spr_player_walljump;
 			image_xscale = 1;
-		}
+			break;
+		case obj_init.colliding_wall.NONE:
+			vsp = -jumpspd; 
+			break;
 	}
 }
+if (vsp < 0 && !jump_down) { vsp = max(vsp, 0); }
 
-if (walljumpcounter > 0) walljumpcounter--;
+
+//// enable jump
+//if (!jumping 
+//	&& ((place_meeting(x, y + 1, obj_wall) && (jump || jump_down))// wall below
+//	||  (place_meeting(x+(sprite_width/2), y, obj_wall) || place_meeting(x-(sprite_width/2), y, obj_wall)) && (jump || jump_down) && walljumpcounter == 0)) { // wall beside
+//	if (jump) { vsp = -jumpspd; }
+	
+//	// if walljumping, add some jump 'knock'
+//	if (!(place_meeting(x, y + 1, obj_wall))){ // make sure we're in the air
+//		jumpcounter = 0; // disable the double jump while wall jumping
+//		walljumping = true;
+//		walljumpcounter = WALLJUMP_COOLDOWN;
+//		if (place_meeting(x-1, y, obj_wall)){ // walljump left side
+////			show_debug_message("Eyyy - wall left side!");
+//			hsp = +WALLJUMP_KNOCK;
+//			vsp = -WALLJUMP_KNOCK;
+//			sprite_index = spr_player_walljump; 
+//			image_xscale = -1;
+//		}
+//		if (place_meeting(x+1, y, obj_wall)){ // walljump right side
+////			show_debug_message("Eyyy - wall right side!");
+//			hsp = -WALLJUMP_KNOCK;
+//			vsp = -WALLJUMP_KNOCK;
+//			sprite_index = spr_player_walljump;
+//			image_xscale = 1;
+//		}
+//	}
+//}
+
+//if (walljumpcounter > 0) { 
+//	walljumpcounter--;
+//}
 
 
 // wall collision - vertical
@@ -157,7 +185,6 @@ if (place_meeting(x, y + vsp, obj_wall)){
 	while (!place_meeting(x, y + sign(vsp), obj_wall)){
 		y += sign(vsp);
 	}
-	if (sign(vsp) > 0) { jumpcounter = 0; } // reset the jump counter if touched the ground
 	vsp = 0;
 	walljumping = false;
 }	
@@ -172,8 +199,8 @@ if (place_meeting(x + hsp, y, obj_wall)){
 
 
 
-show_debug_message("attackcounter: " + string(attackcounter / room_speed))
-show_debug_message("walljump counter: " + string(walljumpcounter));
+//show_debug_message("attackcounter: " + string(attackcounter / room_speed))
+//show_debug_message("walljump counter: " + string(walljumpcounter));
 
 if (stunned) {
 	hsp = 0;	

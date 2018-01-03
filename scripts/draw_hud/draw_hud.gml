@@ -13,8 +13,8 @@ hpiece_num = argument[1];
 camera_x = camera_get_view_x(view_camera[0])
 camera_y = camera_get_view_y(view_camera[0])
 
-show_debug_message("camera_x: " + string(camera_x));
-show_debug_message("camera_y: " + string(camera_y));
+//show_debug_message("camera_x: " + string(camera_x));
+//show_debug_message("camera_y: " + string(camera_y));
 
 draw_sprite(spr_hud_health, 0, 0, 0);
 draw_set_font(fnt_hud_health);
