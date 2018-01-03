@@ -122,11 +122,11 @@ if (vsp < grav){ // if on the down side of the jump curve
 //}
 
 // jump
-if (jump 
-	&& (on_ground(x, y)
-	|| (on_wall(x, y) != obj_init.colliding_wall.NONE))
-	) {
-	switch (on_wall(x, y)) {
+if (jump) {
+	if (on_ground(x, y)) {
+		vsp = -jumpspd;
+	} else {
+		switch (on_wall(x, y)) {
 		case obj_init.colliding_wall.LEFT:
 			walljumping = true;
 			hsp = +WALLJUMP_KNOCK;
@@ -141,9 +141,7 @@ if (jump
 			sprite_index = spr_player_walljump;
 			image_xscale = 1;
 			break;
-		case obj_init.colliding_wall.NONE:
-			vsp = -jumpspd; 
-			break;
+		}
 	}
 }
 if (vsp < 0 && !jump_down) { vsp = max(vsp, 0); }
