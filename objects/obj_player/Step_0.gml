@@ -181,3 +181,8 @@ if (stunned) {
 
 x += hsp;
 y += vsp;
+
+with (hurtbox) {
+	x = other.x + offset_x;
+	y = other.y + offset_y;
+}

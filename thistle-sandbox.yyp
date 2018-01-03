@@ -191,6 +191,63 @@
             }
         },
         {
+            "Key": "0f19c1b5-73e2-4b09-bd6a-2ddd2254ec46",
+            "Value": {
+                "id": "f7f1a3c8-b38b-4441-888c-8c6bef9ec06c",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "sprites\/spr_hitbox\/spr_hitbox.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "0fa8b7b0-4695-403e-b970-8cc33a335c15",
+            "Value": {
+                "id": "8d9d9b8d-adba-44ff-a444-12092569cc15",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "scripts\/draw_hitbox\/draw_hitbox.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
+            "Key": "11052f72-e9be-4310-a507-ba4beace9e9f",
+            "Value": {
+                "id": "2dae5374-1414-4d4d-9bf1-b0917b28a4cd",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "sprites\/spr_jelly\/spr_jelly.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "170c4fbb-0830-428a-8836-5ab0b17e2968",
             "Value": {
                 "id": "2dff86db-a251-4b0a-8638-77e9cd54f82b",
@@ -207,6 +264,25 @@
                 ],
                 "resourcePath": "views\/170c4fbb-0830-428a-8836-5ab0b17e2968.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "171246c7-bdda-43ed-8b78-e3aa452b2edc",
+            "Value": {
+                "id": "6bae9e81-5595-44c7-b12b-d9924664b9ee",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "sounds\/boss_jelly_music\/boss_jelly_music.yy",
+                "resourceType": "GMSound"
             }
         },
         {
@@ -438,6 +514,25 @@
             }
         },
         {
+            "Key": "47e0ef94-c9f5-4b9d-991e-f0287027043a",
+            "Value": {
+                "id": "1278a692-e9ef-4c62-8c00-7dde3437044f",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "sprites\/spr_hurtbox\/spr_hurtbox.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
             "Key": "47e998b4-8da0-4034-b2b7-f17cf1877498",
             "Value": {
                 "id": "3607eb84-9e45-45ab-8d15-8f9e995aa619",
@@ -514,6 +609,25 @@
             }
         },
         {
+            "Key": "595828aa-0ae1-4b51-86a7-fb5882218038",
+            "Value": {
+                "id": "ef0e38a7-ea26-4dcd-8844-681d57bdea95",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "scripts\/draw_hurtbox\/draw_hurtbox.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "599f370b-ba88-4bf6-a7dc-0b42bc71ead8",
             "Value": {
                 "id": "492acd94-fc84-4fa8-9437-b3a566691f6f",
@@ -530,6 +644,25 @@
                 ],
                 "resourcePath": "sprites\/spr_player_sword_attack3\/spr_player_sword_attack3.yy",
                 "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "5be63034-0e30-4602-bf8e-d61dbd0d47e7",
+            "Value": {
+                "id": "27587d4f-7b60-49ec-8a89-2c10ecefc66f",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "objects\/obj_boss_jelly\/obj_boss_jelly.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -1027,6 +1160,25 @@
             }
         },
         {
+            "Key": "bb9f4bf1-2ba4-4390-b76a-37aedf235665",
+            "Value": {
+                "id": "0e66e914-5dd0-40b3-8179-c5664697bcd8",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "objects\/obj_hitbox\/obj_hitbox.yy",
+                "resourceType": "GMObject"
+            }
+        },
+        {
             "Key": "befebe28-f5e5-48d6-9ae7-9fd020dac24e",
             "Value": {
                 "id": "2a02d766-9129-408f-a803-fb055f0483fb",
@@ -1214,6 +1366,25 @@
                 ],
                 "resourcePath": "views\/d6da59b6-9c1f-499c-b380-99afa106e76a.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "dcb006c5-261d-423a-ad3f-0f641e14b74b",
+            "Value": {
+                "id": "c218965b-2bd1-4d83-b57d-1b202c80857e",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "objects\/obj_hurtbox\/obj_hurtbox.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -1451,7 +1622,9 @@
         "8f3f6c32-5c2d-47b9-86ff-0ba11647b4af",
         "86d70d14-c60d-4244-be83-5085f7333ade",
         "762f2e76-7220-43de-bb1c-a1ee6004eefc",
-        "cce11804-6aa4-411f-b301-6208512bfac9"
+        "cce11804-6aa4-411f-b301-6208512bfac9",
+        "0fa8b7b0-4695-403e-b970-8cc33a335c15",
+        "595828aa-0ae1-4b51-86a7-fb5882218038"
     ],
     "tutorial": ""
 }

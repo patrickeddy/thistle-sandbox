@@ -25,9 +25,11 @@ if (stunned == true) {
 		stun_counter = room_speed / (1 / STUN_RECOVER);
 	} else {
 		stun_counter--;
-		if (stun_counter == 0) {
+		show_debug_message("Stun:" + string(stun_counter));
+		if (stun_counter <= 0) {
 			// this case only takes place at the end of a stun
-			stunned = false;	
+			stunned = false;
+			stun_counter = 0;
 		}
 	}
 }

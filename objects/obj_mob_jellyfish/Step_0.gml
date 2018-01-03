@@ -10,8 +10,13 @@ if (instance_exists(obj_player) &&
 }
 
 if (place_meeting(x, y, obj_player)) {
-	// stun player for .75 seconds
-	stun_player(.75);
-	obj_player.hp--;
-	instance_destroy();
+	if (obj_player.attacking) {
+		instance_destroy();
+		drop_item(x, y, obj_heart_piece, 25);
+	} else {
+		// stun player for .75 seconds
+		stun_player(.75);
+		obj_player.hp--;
+		instance_destroy();
+	}
 }
