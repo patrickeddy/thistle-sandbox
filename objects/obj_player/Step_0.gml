@@ -99,7 +99,13 @@ if (first_attack
 	attackpress = 0;
 }
 
-
+// hp related
+if (hit_cooldown != 0) { 
+	hit_cooldown--; 
+	image_blend = c_red;
+} else {
+	image_blend = -1;	
+}
 
 
 // add some gravity
