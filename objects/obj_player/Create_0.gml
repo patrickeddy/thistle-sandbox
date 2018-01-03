@@ -1,11 +1,17 @@
 /// @description Player variables
 
+// MUSIC
+
+audio_play_sound(snd_song_idle, 1, true);
+
+// CONSTANTS (modifyable)
+
 MAX_SPEED = 15
 MIN_SPEED = 3
 SPEED_REGENERATE = .5
-// CONSTANTS (modifiable)
+
 spd = 15
-jumpspd = 14
+jumpspd = 18
 
 //-- stunning mechanics --//
 stunned = false;
@@ -51,7 +57,6 @@ hit_cooldown = 0;
 hsp = 0
 vsp = 0
 jumping = false
-jumpcounter = 0
 canwalljump = true
 walljumpcounter = 0
 walljumping = false

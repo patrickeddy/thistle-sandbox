@@ -5,8 +5,8 @@ height = sprite_get_height(mask_index) * image_yscale;
 
 
 // !place_meeting(x+hspd, y+(sprite_height/2)+1, obj_wall)
-if (place_meeting(x+hspd, y, obj_wall)){
-	hspd = -hspd
+if (place_meeting(x+hsp, y, obj_wall)){
+	hsp = -hsp;
 	image_xscale = -image_xscale;
 }
 
@@ -14,6 +14,9 @@ if (place_meeting(x+hspd, y, obj_wall)){
 if (object_exists(obj_player)){
 	if (place_meeting(x, y, obj_player)){
 		if (obj_player.attacking) { // attacking
+			var pd = obj_player.image_xscale; // player facing direction
+			x += pd * 15;
+			y += -5;
 			if (damagecount == 0){
 				damagecount += 1;	
 				hp -= obj_player.atk;
@@ -38,12 +41,12 @@ if (object_exists(obj_player)){
 	}
 }
 
-if (!place_meeting(x, y+vspd+1, obj_wall)){
-	vspd += grav;
+if (!place_meeting(x, y+vsp+1, obj_wall)){
+	vsp += grav;
 } else {
-	vspd = 0;	
+	vsp = 0;	
 }
 
 // move the spider
-x += hspd;
-y += vspd;
+x += hsp;
+y += vsp;

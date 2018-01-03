@@ -1,7 +1,8 @@
 /// @description Spider variables
 
-hspd = 5
-vspd = 0
+spd = 5
+hsp = spd
+vsp = 0
 grav = 0.8
 
 hp = 3
