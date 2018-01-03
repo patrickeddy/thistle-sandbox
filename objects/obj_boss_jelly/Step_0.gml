@@ -9,6 +9,7 @@ if (phase_waiter > 0) exit
 if (current_phase == attack_phase.initial) {
 	if (distance_to_object(obj_player) < 500) {
 		current_phase = attack_phase.spawn_jellies;	
+		audio_stop_all();
 		audio_play_sound(boss_jelly_music, 0, 0);
 	}
 }
