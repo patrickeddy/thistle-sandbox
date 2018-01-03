@@ -7,5 +7,6 @@ if (object_exists(obj_player)) {
 		obj_player.hp--; // damage player 1 hp
 		obj_player.hit_cooldown = cooldown * room_speed;
 	}
-	if (obj_player.hp == 0) { room_restart(); } // restart the room if died.
+	// TODO remove audio_stop_all call
+	if (obj_player.hp == 0) { audio_stop_all();room_restart(); } // restart the room if died.
 }

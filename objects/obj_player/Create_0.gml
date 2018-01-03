@@ -65,4 +65,4 @@ dashing = false
 grav = 0.8
 
 // HURTBOX
-hurtbox = draw_hurtbox(64, 64, -32, -32, true);
+hurtbox = draw_hurtbox(64, 64, -32, -32, false);

@@ -1,8 +1,8 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-hurtbox = draw_hurtbox(384, 128, -192, -192, true);
-hitbox = draw_hitbox(384, 256, -192, -64, true);
+hurtbox = draw_hurtbox(384, 128, -192, -192, false);
+hitbox = draw_hitbox(384, 256, -192, -64, false);
 
 enum attack_phase {
 	spawn_jellies,
