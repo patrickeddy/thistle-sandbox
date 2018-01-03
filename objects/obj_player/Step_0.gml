@@ -125,17 +125,19 @@ if (vsp < grav){ // if on the down side of the jump curve
 if (jump 
 	&& (on_ground(x, y)
 	|| (on_wall(x, y) != obj_init.colliding_wall.NONE))
-	) { 
+	) {
 	switch (on_wall(x, y)) {
 		case obj_init.colliding_wall.LEFT:
+			walljumping = true;
 			hsp = +WALLJUMP_KNOCK;
 			vsp = -WALLJUMP_KNOCK;
 			sprite_index = spr_player_walljump; 
 			image_xscale = -1;
 			break;
 		case obj_init.colliding_wall.RIGHT:
-			hsp = -WALLJUMP_KNOCK;
-			vsp = -WALLJUMP_KNOCK;
+			walljumping = true;
+			hsp = -(WALLJUMP_KNOCK);
+			vsp = -(WALLJUMP_KNOCK);
 			sprite_index = spr_player_walljump;
 			image_xscale = 1;
 			break;

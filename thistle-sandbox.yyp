@@ -343,6 +343,25 @@
             }
         },
         {
+            "Key": "2e20f473-55d5-49b1-8436-fae4a85bda0a",
+            "Value": {
+                "id": "96ccdf8b-05d6-4946-9f55-bd4d6e095fc3",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "scripts\/sdm\/sdm.yy",
+                "resourceType": "GMScript"
+            }
+        },
+        {
             "Key": "315ea972-87d4-4381-84e5-4f5dd1897755",
             "Value": {
                 "id": "e3aa2524-3e24-4e88-a576-620a5b78553b",
